@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= product.name %></title>
+</head>
+<body>
+    <h1><%= product.name %></h1>
+    <div>
+        <p><%= product.description %></p>
+        <button onclick="deleteProduct('<%= product.name %>')">Delete</button>
+    </div>
+
+    <script>
+        function deleteProduct(productName) {
+            fetch(`/products/${productName}`, { method: 'DELETE' })  <!-- URL'yi doğru şekilde güncelledik -->
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = '/products';  // Silme işleminden sonra ürünler sayfasına yönlendir
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
+
